@@ -18,7 +18,7 @@ chinadns + dnsmasq
 
 ## Run
 
-    fig up -d
+    docker-compose up -d
 
 ## Test
 
