@@ -5,8 +5,9 @@ chinadns + dnsmasq
 
 - chinadns: Protect yourself against DNS poisoning in China.
 - dnsmasq: A free software DNS forwarder and DHCP server for small networks.
+- Forked from: https://github.com/vimagick/dockerfiles/tree/master/chinadns
 
-## Fig
+## Docker Compose
 
     chinadns:
       image: vimagick/chinadns
