@@ -24,12 +24,16 @@ RUN apt-get update \
     && apt-get remove -y build-essential \
     && apt-get autoremove -y \
     && rm -rf /var/lib/apt/lists/*
+    && curl -sSL https://raw.githubusercontent.com/felixonmars/dnsmasq-china-list/master/accelerated-domains.china.conf -o /etc/dnsmasq.d/accelerated-domains.china.conf \
+    && curl -sSL https://raw.githubusercontent.com/felixonmars/dnsmasq-china-list/master/bogus-nxdomain.china.conf -o /etc/dnsmasq.d/bogus-nxdomain.china.conf \
+    && curl -sSL https://raw.githubusercontent.com/felixonmars/dnsmasq-china-list/master/google.china.conf -o /etc/dnsmasq.d/google.china.conf
 
 RUN curl http://ftp.apnic.net/apnic/stats/apnic/delegated-apnic-latest \
         | grep ipv4 \
             | grep CN \
                 | awk -F\| '{printf("%s/%d\n", $4, 32-log($5)/log(2))}' > /etc/chnroute.txt
 
+ADD ./dnsmasq-update-china-list /usr/bin/
 ADD ./services.conf /etc/supervisor/conf.d/
 
 EXPOSE 53/tcp 53/udp
