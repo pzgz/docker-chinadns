@@ -20,7 +20,7 @@ chinadns + dnsmasq
 
 **!! Make sure the prepare the host directories which will be mapped into the container**
 
-    docker-compose up -d --name chinadns -p 53:53 -v /volume3/docker/chinadns/dnsmasq.d:/etc/dnsmasq.d
+    docker run -d --name="chinadns" -p 53:53/udp -p 53:53/tcp -v /volume3/docker/chinadns/dnsmasq.d:/etc/dnsmasq.d lguan77/chinadns
 
 ## DNSmasq configurations
 
