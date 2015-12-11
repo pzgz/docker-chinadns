@@ -23,10 +23,7 @@ RUN apt-get update \
         && rm -rf chinadns \
     && apt-get remove -y build-essential \
     && apt-get autoremove -y \
-    && rm -rf /var/lib/apt/lists/* \
-    && curl -sSL https://raw.githubusercontent.com/felixonmars/dnsmasq-china-list/master/accelerated-domains.china.conf -o /etc/dnsmasq.d/accelerated-domains.china.conf \
-    && curl -sSL https://raw.githubusercontent.com/felixonmars/dnsmasq-china-list/master/bogus-nxdomain.china.conf -o /etc/dnsmasq.d/bogus-nxdomain.china.conf \
-    && curl -sSL https://raw.githubusercontent.com/felixonmars/dnsmasq-china-list/master/google.china.conf -o /etc/dnsmasq.d/google.china.conf
+    && rm -rf /var/lib/apt/lists/*
 
 RUN curl http://ftp.apnic.net/apnic/stats/apnic/delegated-apnic-latest \
         | grep ipv4 \

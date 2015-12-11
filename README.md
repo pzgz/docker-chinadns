@@ -18,7 +18,23 @@ chinadns + dnsmasq
 
 ## Run
 
-    docker-compose up -d
+**!! Make sure the prepare the host directories which will be mapped into the container**
+
+    docker-compose up -d --name chinadns -p 53:53 -v /volume3/docker/chinadns/dnsmasq.d:/etc/dnsmasq.d
+
+## DNSmasq configurations
+
+A host directory will be mapped to `/etc/dnsmasq.d` in container, so configuration files in this directory will be loaded by dnsmasq.
+
+For me, I will load the files grabbed from [dnsmasq-china-list](https://github.com/felixonmars/dnsmasq-china-list)
+
+```
+wget https://raw.githubusercontent.com/felixonmars/dnsmasq-china-list/master/google.china.conf
+wget https://raw.githubusercontent.com/felixonmars/dnsmasq-china-list/master/accelerated-domains.china.conf
+wget https://raw.githubusercontent.com/felixonmars/dnsmasq-china-list/master/bogus-nxdomain.china.conf
+```
+
+Same, any extra configurations can be added to this directory.
 
 ## Test
 
@@ -27,4 +43,3 @@ chinadns + dnsmasq
 
     # TCP
     dig @127.0.0.1 www.youtube.com +tcp
-
